@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please consider citing this repository."
+authors:
+- family-names: "Rosseel"
+  given-names: "Hannes"
+  orcid: "https://orcid.org/0000-0002-3066-5332"
+- family-names: "van Waterschoot"
+  given-names: "Toon"
+  orcid: "https://orcid.org/0000-0002-6323-7350"
+title: "Improving Acoustic Reflector Localization with Time Delay Interpolation"
+version: 1.0.0
+date-released: 2025-01-26
+url: "https://github.com/hrosseel/TDOA_INTERP/"

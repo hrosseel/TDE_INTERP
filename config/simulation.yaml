@@ -1,0 +1,24 @@
+# Configuration file for src/simulations.py
+
+fs: 8000            # sampling frequency  (Hz)
+c: 343.0            # speed of sound (m/s)
+snr: 40             # signal-to-noise ratio (dB)
+frame_length: 0.004  # frame length (s)
+
+num_sources: 1000    # number of image sources to simulate
+
+mic_center: [0, 0]  # center of microphone array (m)
+mic_spacing: 0.2  # spacing between microphones (m)
+num_mics: 6  # number of microphones
+
+interp_factor: 200  # interpolation factor
+interp_range_crit: [1, 9]  # interpolation range for critical sampling
+interp_range_band: [32, 9] # interpolation range for bandlimited sampling
+
+fs_range: [2, 8, 16, 32, 48]  # sampling frequency range (kHz)
+interp_factor_range: [1, 2, 4, 10, 20, 30, 60, 120, 200]  # interpolation factor range
+snr_range: [-10, -5, 0, 5, 10, 25, 40, 50, 60]  # signal-to-noise ratio range (dB)
+frame_length_range: [0.001, 0.002, 0.004, 0.008, 0.016]  # frame length range (s)
+interp_sample_range: [1, 2, 3, 5, 9, 13, 16, 25, 32]  # interpolation range (samples)
+
+random_seed: 123    # random seed for reproducibility

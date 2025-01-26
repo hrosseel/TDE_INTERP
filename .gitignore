@@ -1,0 +1,9 @@
+.DS_Store
+.vscode/
+.venv/
+*.egg-info
+*.log
+*.pgf
+*.npz
+*.png
+__pycache__/
