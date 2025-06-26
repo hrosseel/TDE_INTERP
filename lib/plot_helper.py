@@ -10,7 +10,7 @@ labels = [
     "Parabolic",
     "Gaussian",
     # "Frequency",
-    "Weighted Frequency",
+    "Weighted Freq.",
     "Sinc",
     "Whittaker-Shannon",
 ]

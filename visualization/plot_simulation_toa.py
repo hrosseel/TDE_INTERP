@@ -15,7 +15,8 @@ plt.rcParams.update({
 })
 
 text_width = 3.48761  # column width in inches
-text_height = text_width * (7/10)
+text_width = 246 * 100 / 7227  # column width pt to inches
+text_height = text_width * (8/10)
 
 FN_BAND_TEMPL = "{}_toa_b0.8"  # File name template bandlimited
 FN_CRIT_TEMPL = "{}_toa_crit"  # File name template critically sampled
@@ -77,7 +78,11 @@ def plot_simulation_interp(FN, linestyle="solid"):
         ylabel=y_label,
         linestyle=linestyle,
     )
-    ax.legend(fontsize=6, loc="upper right", bbox_to_anchor=(0, 0, 1, 0.94))
+    if "crit" in FN:
+        ax.legend(fontsize=6, loc="upper right", bbox_to_anchor=(0, 0, 1, 0.951))
+    else:
+        ax.legend(fontsize=6, loc="upper right", bbox_to_anchor=(0, 0, 1, 0.93))
+ 
     fig.tight_layout()
     fig.set_size_inches(w=text_width, h=text_height)
     fig.savefig(f"./figures/sim_{FN}.pdf")
@@ -111,8 +116,7 @@ def plot_simulation_winlen(FN, linestyle="solid"):
         ylabel=y_label,
         linestyle=linestyle,
     )
-
-    ax.legend(fontsize=6, loc="upper right", bbox_to_anchor=(0, 0, 1, 0.94))
+    ax.legend(fontsize=6, loc="upper right", bbox_to_anchor=(0, 0, 1, 0.945))
     fig.tight_layout()
     fig.set_size_inches(w=text_width, h=text_height)
     fig.savefig(f"./figures/sim_{FN}.pdf")

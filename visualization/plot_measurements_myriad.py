@@ -5,9 +5,9 @@ import scienceplots  # noqa: F401
 
 plt.style.use(["science", "ieee", "grid", "std-colors"])
 
-column_width = 3.48761  # column width in inches
-text_width = column_width  # column width in inches
-text_height = text_width * (7/10)
+text_width = 3.48761  # column width in inches
+text_width = 246 * 100 / 7227  # column width pt to inches
+text_height = text_width * (10/10)
 
 # Load the data
 basepath = "./data/results/"
@@ -18,7 +18,7 @@ legend_labels = [
     "No interpolation",
     "Parabolic",
     "Gaussian",
-    "Weighted Frequency",
+    "Weighted Freq.",
     "Sinc",
     "Whittaker-Shannon",
 ]
@@ -43,12 +43,12 @@ _ = [
     for i in range(tdoa_errors.shape[1])
 ]
 ax.set_ylabel("TDOA error (µs)")
-ax.set_ylim([-5, 150])
-ax.set_xticks(np.arange(len(legend_labels)), legend_labels, rotation=25, fontsize=7)
+ax.set_ylim([-5, 155])
+ax.set_xticks(np.arange(len(legend_labels)), legend_labels, rotation=40, fontsize=8, minor=False)
 legend = plt.legend(
-    ["Direct path", "First reflection", "Second reflection", "Third reflection"],
+    ["Direct path", "First refl.", "Second refl.", "Third refl."],
     loc="upper right",
-    fontsize=6,
+    fontsize=7,
 )
 _ = [handle.set_color(f"C{i}") for i, handle in enumerate(legend.legend_handles)]
 
@@ -77,10 +77,10 @@ _ = [
     for i in range(pos_errors.shape[1])
 ]
 ax.set_ylabel("Positional error (m)")
-ax.set_xticks(np.arange(len(legend_labels)), legend_labels, rotation=25, fontsize=7)
+ax.set_xticks(np.arange(len(legend_labels)), legend_labels, rotation=40, fontsize=8, minor=False)
 legend = plt.legend(
-    ["Direct path", "First reflection", "Second reflection", "Third reflection"],
-    fontsize=6,
+    ["Direct path", "First refl.", "Second refl.", "Third refl."],
+    fontsize=7,
     loc="lower right",
 )
 _ = [handle.set_color(f"C{i}") for i, handle in enumerate(legend.legend_handles)]

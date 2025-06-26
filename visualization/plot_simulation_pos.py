@@ -19,7 +19,8 @@ FN_CRIT_TEMPL = "{}_pos_crit"  # File name template critically sampled
 y_label = "$\\frac{1}{K} \\sum\\limits_{k = 0}^{K-1} \\frac{\\| \\mathbf{x}_k - \\hat{\\mathbf{x}}_k \\|_2}{\\| \\mathbf{r}_c - \\mathbf{x}_k \\|_2}$"
 
 text_width = 3.48761  # column width in inches
-text_height = text_width * (6/10)
+text_width = 246 * 100 / 7227  # column width pt to inches
+text_height = text_width * (8/10)
 
 # Define markers
 markers = ["o", "s", "D", "*", "^", "p"]
@@ -59,6 +60,8 @@ def plot_simulation_fs(FN, linestyle="solid"):
         ylabel=y_label,
         linestyle=linestyle,
     )
+    if "b0.8" in FN:
+        ax.set_ylim([2e-5, 3e-1])
     fig.set_size_inches(w=text_width, h=text_height)
     fig.tight_layout() 
     fig.savefig(f"./figures/sim_{FN}.pdf")
