@@ -18,7 +18,8 @@ plt.rcParams.update({
     'pgf.rcfonts': False,
 })
 text_width = 3.48761  # column width in inches
-text_height = text_width * (4/5)
+text_width = 246 * 100 / 7227  # column width pt to inches
+text_height = text_width * (8/10)
 
 ##############################################################################
 # Compare phase response of the Thiran allpass filter with different delays
