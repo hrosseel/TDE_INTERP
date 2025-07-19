@@ -207,12 +207,12 @@ def sinc_interp(
     """
     if interp_factor <= 0:
         raise ValueError(
-            "Interpolation factor has to be a strictly" " positive integer."
+            "Interpolation factor has to be a strictly positive integer."
         )
     if len(data.shape) == 1:
         data = np.atleast_2d(data).T
     if S < 1:
-        raise ValueError("Number of samples have to be a strictly positive" " integer.")
+        raise ValueError("Number of samples have to be a strictly positive integer.")
     # Number of channels
     num_channels = data.shape[1]
 

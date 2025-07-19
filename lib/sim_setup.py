@@ -70,7 +70,7 @@ def generate_rirs_for_simulation(
     num_sources: int,
     src_spacing: float,
     max_mic_spacing: float,
-    bandlimit: (float or None) = None,
+    bandlimit: float | None = None,
     fs: int = 1,
     c: float = 343.0,
     fir_order: int = 50,
