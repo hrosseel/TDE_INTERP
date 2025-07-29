@@ -305,7 +305,9 @@ ax.set_xlim([17 - 5, 17 + 5])  # Center around the maximum value
 ax.set_xlabel("Samples")
 ax.set_ylabel("Amplitude")
 
-TEXT_WIDTH = 246 * 100 / 7227  # column width pt to inches
+# TEXT_WIDTH = 246 * 100 / 7227  # column width pt to inches
+TEXT_WIDTH = 341 * 100 / 7227  # column width pt to inches (thesis)
+
 TEXT_HEIGHT = TEXT_WIDTH * (8/10)
 
 fig.tight_layout()

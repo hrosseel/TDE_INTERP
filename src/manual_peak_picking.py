@@ -13,8 +13,40 @@ from lib.measurements import (
 )
 from lib.myriad_window_indices import refl_start_indices, win_size
 
+import scienceplots
+plt.style.use(["science", "grid", "ieee", "std-colors"])
+# Use scienceplots for better plotting styles
+
+# Plot using LaTeX
+plt.rc('text', usetex=True)
+# matplotlib.use("pgf")
+plt.rcParams.update({
+    "pgf.texsystem": "pdflatex",
+    'font.family': 'serif',
+    'text.usetex': True,
+    'pgf.rcfonts': False,
+})
+
+
 # Plot Flag
-PLOT = False
+PLOT = True
+
+
+def _plot_measurements(time_ms: np.array, rirs: np.array, valid_frames_ind: np.array,
+                       win_size: int, fs: int, xlims: list = None, ylims: list = None,
+                       ax: plt.Axes = None) -> plt.Axes:
+    if ax is None:
+        _, ax = plt.subplots(1, 1, dpi=300)
+    ax.plot(time_ms, rirs)
+    
+    win_size_ms = win_size * 1000 / fs
+    for idx_ms in valid_frames_ind * 1000 / fs:
+        ax.axvspan(idx_ms, idx_ms + win_size_ms, color="gray", alpha=0.2, linewidth=0.0)
+
+    ax.set_ylim(ylims if ylims is not None else [-1.1, 1.1])
+    ax.set_xlim(xlims if xlims is not None else [0, 30])
+
+    return ax
 
 
 def _get_measurements(
@@ -92,7 +124,9 @@ output_frames = []
 toas_gts = []
 # Apply matched filter to each measurement
 for m_idx, (start_ind, rirs) in enumerate(zip(refl_start_indices, measurements)):
-    rirs_matched = apply_matched_filter(rirs.T, 30)
+
+    rirs_normalized = rirs / np.max(np.abs(rirs))
+    rirs_matched = apply_matched_filter(rirs_normalized.T, 30)
 
     # Apply sliding window to rirs_matched
     frames = np.array(
@@ -125,20 +159,42 @@ for m_idx, (start_ind, rirs) in enumerate(zip(refl_start_indices, measurements))
     frame_ind.append(valid_frames_ind)
     output_frames.append(frames_finetuned)
 
+    time_ms = np.arange(rirs_matched.shape[0]) * 1000 / fs
+
     if PLOT:
-        # Plot the matched RIRs
-        fig, ax = plt.subplots(1, 1, dpi=100)
-        ax.plot(rirs_matched)
-        for idx in valid_frames_ind:
-            ax.axvspan(idx, idx + win_size, color="red", alpha=0.5)
 
-        ax.set_title(f"Matched RIRs - {lsp_pos[m_idx]}")
-        ax.set_xlabel("Samples")
-        ax.set_ylabel("Amplitude")
-        ax.grid()
+        text_width = 246 * 100 / 7227  # column width pt to inches (paper)
+        # text_width = 341 * 100 / 7227  # column width pt to inches (thesis)
+        text_height = text_width * (8/10)
+        fig, axs = plt.subplots(2, 1, dpi=300, sharex=True)
+        _plot_measurements(
+            time_ms,
+            rirs_normalized.T,
+            valid_frames_ind,
+            win_size,
+            fs,
+            xlims=[0, 30],
+            ylims=[-1.1, 1.1],
+            ax=axs[0]
+        )
 
+        _plot_measurements(
+            time_ms,
+            rirs_matched,
+            valid_frames_ind,
+            win_size,
+            fs,
+            xlims=[0, 30],
+            ylims=[-1.5, 7],
+            ax=axs[1]
+        )
+        axs[1].set_xlabel("Time (ms)")
+        axs[0].set_ylabel("Amplitude")
+        axs[1].set_ylabel("Amplitude")
+        fig.set_size_inches(w=text_width, h=text_height)
+        fig.tight_layout()
+        fig.savefig(f"figures/myriad_rirs_matched_{lsp_pos[m_idx]}.pdf")
+        
 np.save("data/myriad_toas_gts.npy", toas_gts)
 np.save("data/myriad_frames.npy", output_frames)
 np.save("data/myriad_frame_indices.npy", frame_ind)
-
-plt.show()
