@@ -1,6 +1,6 @@
 # On Time Delay Interpolation for Improved Acoustic Reflector Localization
 
-This repository contains the code for the paper "On Time Delay Interpolation for Improved Acoustic Reflector Localization".
+This repository contains the code for the paper "On Time Delay Interpolation for Improved Acoustic Reflector Localization", which was submitted to the Journal of the Acoustical Society of America (JASA). A preprint of this publication can be found on [ArXiv](https://arxiv.org/abs/2509.04629).
 
 Authors: Hannes Rosseel and Toon van Waterschoot.
 
@@ -47,11 +47,13 @@ To use the *MYRiAD* dataset, download the dataset and extract the contents to th
 If you use this code in your research, consider citing the repository and the preprint below:
 
 ```
-@unpublished{rosseel2025time,
-  title={On Time Delay Interpolation for Improved Acoustic Reflector Localization}
-  author={Rosseel, Hannes and van Waterschoot, Toon},
-  note={unpublished},
-  year={2025},
-  url={},
+@misc{rosseel2025time,
+      title={On Time Delay Interpolation for Improved Acoustic Reflector Localization}, 
+      author={Hannes Rosseel and Toon van Waterschoot},
+      year={2025},
+      eprint={2509.04629},
+      archivePrefix={arXiv},
+      primaryClass={eess.AS},
+      url={https://arxiv.org/abs/2509.04629}, 
 }
 ```
